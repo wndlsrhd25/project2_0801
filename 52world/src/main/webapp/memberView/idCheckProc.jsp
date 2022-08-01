@@ -12,7 +12,7 @@
 <h3>아이디 중복체크 결과</h3>
 
 
-<%
+<%-- <%
 	MemberDAO dao = new MemberDAO();
 	String id= request.getParameter("id").trim();
 	int cnt=dao.checkId(id);
@@ -28,7 +28,7 @@
 	<hr>
 	<a href="javascript:history.back()">[다시검색]</a>
 	&nbsp;&nbsp;
-	<a href="javascript:window.close()">[창닫기]</a>
+	<a href="javascript:window.close()">[창닫기]</a> --%>
 	
 	
 	</div>

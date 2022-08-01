@@ -14,9 +14,9 @@ import com.dev.vo.MemberVO;
 
 public class MemberDAO {
 
-	Connection conn;
-	PreparedStatement pstmt;
-	ResultSet rs;
+	private Connection conn;
+	private PreparedStatement pstmt;
+	private ResultSet rs;
 	
 	public void connect() {
 		try {
@@ -45,7 +45,7 @@ public class MemberDAO {
 	
 	//입력 
 	public void insertMember (MemberVO vo) {
-		String sql="insert into member(id,password,name, birth,gender,email,phone) values(?,?,?,?,?,?,?)";
+		String sql="insert into member(id,password,name,birth,gender,email,phone) values(?,?,?,?,?,?,?)";
 		connect();
 		
 		try {
@@ -53,7 +53,7 @@ public class MemberDAO {
 			pstmt.setString(1, vo.getId());
 			pstmt.setString(2, vo.getPassword());
 			pstmt.setString(3, vo.getName());
-			pstmt.setDate(4, vo.getBirth());
+			pstmt.setString(4, vo.getBirth());
 			pstmt.setString(5, vo.getGender());
 			pstmt.setString(6, vo.getEmail());
 			pstmt.setString(7, vo.getPhone());
@@ -63,8 +63,6 @@ public class MemberDAO {
 			System.out.println(r+"건 입력");
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			disconnect();
 		}
 	}
 	
@@ -87,9 +85,7 @@ public class MemberDAO {
 					
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			disconnect();
-		}
+		} 
 		//동일아이디가 없는 경우 0을 반환
 		return false;
 	}
@@ -107,7 +103,7 @@ public class MemberDAO {
 				vo.setId(rs.getString("id"));
 				vo.setPassword(rs.getString("password"));
 				vo.setName(rs.getNString("name"));
-				vo.setBirth(rs.getDate("birth"));
+				vo.setBirth(rs.getString("birth"));
 				vo.setGender(rs.getString("gender"));
 				vo.setEmail(rs.getNString("email"));
 				vo.setPhone(rs.getString("phone"));
@@ -117,9 +113,7 @@ public class MemberDAO {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		} finally {
-			disconnect();
-		}
+		} 
 		return list;
 	}
 	
@@ -136,7 +130,7 @@ public class MemberDAO {
 				vo.setId(rs.getString("id"));
 				vo.setPassword(rs.getString("password"));
 				vo.setName(rs.getNString("name"));
-				vo.setBirth(rs.getDate("birth"));
+				vo.setBirth(rs.getString("birth"));
 				vo.setGender(rs.getString("gender"));
 				vo.setEmail(rs.getNString("email"));
 				vo.setPhone(rs.getString("phone"));
@@ -147,9 +141,7 @@ public class MemberDAO {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		} finally {
-			disconnect();
-		}
+		} 
 		
 		return null;
 	}
@@ -173,8 +165,6 @@ public class MemberDAO {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		}finally {
-			disconnect();
 		}
 		return false;
 		

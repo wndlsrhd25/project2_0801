@@ -51,14 +51,14 @@ prefix="c"%>
         <div class="birthGroup">
           <h3 class="birthTitle">
             <label for="birth">생년월일</label>
-            <select id="컬럼명" name="컬럼명" class="form-control">
+            <select id="year" name="year" >
               <option value="">년</option>
               <c:forEach var="i" begin="1900" end="2022">
                 <option value="${i}">${i}</option>
               </c:forEach>
             </select>
 
-            <select id="컬럼명" name="컬럼명" class="form-control">
+            <select id="month" name="month" >
               <option value="">월</option>
               <c:forEach var="i" begin="1" end="12">
                 <c:choose>
@@ -72,7 +72,7 @@ prefix="c"%>
               </c:forEach>
             </select>
 
-            <select id="컬럼명" name="컬럼명" class="form-control">
+            <select id="day" name="day" >
               <option value="">일</option>
               <c:forEach var="i" begin="1" end="31">
                 <c:choose>
@@ -149,7 +149,9 @@ prefix="c"%>
         <div class="phoneGroup">
           <h3 class="phoneTitle">
             <label for="phone">전화번호</label>
-            <input type="tel" name="phone" id="phone" size="15" placeholder="숫자만 입력해주세요." onkeyup="mobile_keyup(this)" required />
+            <input type="text" name="firstPhone" id="firstPhone" size="5" maxlength='3' onkeyup ="nextBlank(3,this.id,'secondPhone');" required />
+            <input type="text" name="secondPhone" id="secondPhone" size="5" maxlength='4' onkeyup ="nextBlank(4,this.id,'lastPhone');" required  />
+            <input type="text" name="lastPhone" id="lastPhone" size="5" maxlength='4' required />
             <button type="button" onclick="phoneCheck();">중복체크</button>
           </h3>
         </div>
@@ -205,7 +207,15 @@ prefix="c"%>
         }
       }
       
-      //  Mobile  - 하이픈 자동 생성 
+      //핸드폰 번호
+      function nextBlank(N,Obj,nextID){
+         if(document.getElementById(Obj).value.length == N) {
+             document.getElementById(nextID).focus();
+          }
+      }
+      
+      
+ /*      //  Mobile  - 하이픈 자동 생성 
       function mobile_keyup(obj){
           let mobile_len=obj.value.length;
           console.log(mobile_len)
@@ -215,7 +225,7 @@ prefix="c"%>
           }else if (mobile_len==3 || mobile_len==8){
               obj.value += '-';
           }
-      }
+      } */
     </script>
   </body>
 </html>
